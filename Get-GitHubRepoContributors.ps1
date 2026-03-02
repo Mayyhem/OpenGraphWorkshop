@@ -1,7 +1,7 @@
 #!/usr/bin/env pwsh
 [CmdletBinding()]
 param($Repo = "SpecterOps/BloodHound")
-
+$OutputFile = "$($Repo -replace '/', '-')-opengraph.json"
 $apiUrl = "https://api.github.com/repos/$Repo/contributors?per_page=100"
 Write-Verbose "GET $apiUrl"
 $contributors = Invoke-RestMethod -Uri $apiUrl
@@ -27,6 +27,6 @@ foreach ($contributor in $contributors) {
 }
 
 # Wrap in the BloodHound payload format and save to disk
-@{ graph = @{ nodes = $nodes; edges = $edges } } | ConvertTo-Json -Depth 10 | Set-Content "$($Repo -replace '/', '-')-opengraph.json" -Encoding utf8
+@{ graph = @{ nodes = $nodes; edges = $edges } } | ConvertTo-Json -Depth 10 | Set-Content $OutputFile -Encoding utf8
 
 Write-Host "Done! Wrote $($nodes.Count) nodes and $($edges.Count) edges to: $OutputFile"
