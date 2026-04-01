@@ -1,0 +1,11 @@
+{
+  "custom_types": {
+    "Person": {
+      "icon": {
+        "type": "font-awesome",
+        "name": "face-smile",
+        "color": "#03CEFC"
+      }
+    }
+  }
+}

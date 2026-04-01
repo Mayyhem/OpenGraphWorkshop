@@ -1,0 +1,46 @@
+{
+  "graph": {
+    "nodes": [
+      {
+        "id": "B1",
+        "kinds": [
+          "Person"
+        ],
+        "properties": {
+          "name": "BOB"
+        }
+      },
+      {
+        "id": "A1",
+        "kinds": [
+          "Person"
+        ],
+        "properties": {
+          "name": "ALICE"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "start": {
+          "value": "B1"
+        },
+        "kind": "Knows",
+        "end": {
+          "value": "A1"
+        },
+        "properties": {}
+      },
+      {
+        "start": {
+          "value": "A1"
+        },
+        "kind": "Knows",
+        "end": {
+          "value": "B1"
+        },
+        "properties": {}
+      }
+    ]
+  }
+}

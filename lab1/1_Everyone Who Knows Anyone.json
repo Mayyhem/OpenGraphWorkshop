@@ -1,0 +1,1 @@
+{"query":"MATCH p = ()-[:Knows]-()\nRETURN p","name":"Everyone Who Knows Anyone","description":""}
