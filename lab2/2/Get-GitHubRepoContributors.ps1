@@ -19,7 +19,7 @@ foreach ($repo in $repos) {
     # Add repo node — only keep scalar properties (strings, numbers, bools)
     $repoProps = @{}
     $repo.PSObject.Properties | Where-Object { $null -ne $_.Value -and $_.Value -isnot [System.Management.Automation.PSObject] -and $_.Value -isnot [System.Array] } | ForEach-Object { $repoProps[$_.Name] = $_.Value }
-    $nodes += @{ id = $repoFull; kinds = @("Repo"); properties = $repoProps }
+    $nodes += @{ id = $repoFull; kinds = @("GH_Repo"); properties = $repoProps }
 
     # Fetch contributors for this repo
     $contribUrl = "https://api.github.com/repos/$repoFull/contributors?per_page=100"
@@ -36,7 +36,7 @@ foreach ($repo in $repos) {
         if (-not $seenUsers.ContainsKey($contributor.login)) {
             $props = @{}
             $contributor.PSObject.Properties | Where-Object { $null -ne $_.Value -and $_.Value -isnot [System.Management.Automation.PSObject] -and $_.Value -isnot [System.Array] } | ForEach-Object { $props[$_.Name] = $_.Value }
-            $nodes += @{ id = $contributor.login; kinds = @("User"); properties = $props }
+            $nodes += @{ id = $contributor.login; kinds = @("GH_User"); properties = $props }
             $seenUsers[$contributor.login] = $true
         }
 

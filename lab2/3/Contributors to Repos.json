@@ -1,0 +1,1 @@
+{"query":"MATCH p = ()-[:ContributedTo]-\u003e()\nRETURN p","name":"Contributors to Repos","description":""}

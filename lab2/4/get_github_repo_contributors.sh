@@ -20,15 +20,18 @@ OUTPUT_FILE="${REPO//\//-}-opengraph.json"
 curl -s "https://api.github.com/repos/$REPO/contributors?per_page=100" \
   | jq --arg repo "$REPO" '{
       graph: {
-        nodes:
-          ([{id: ($repo), kinds: ["GH_Repo"], properties: {name: ($repo)}}]
-          + [.[] | {id: .login, kinds: ["GH_User"], properties: .}]),
-        edges:
-          [.[] | {
-            start: {match_by: "id", value: .login},
-            end:   {match_by: "id", value: ($repo)},
-            kind:  "ContributedTo"
-          }]
+        nodes: ([{id: ($repo), kinds: ["GH_Repo"], properties: {name: ($repo)}}]
+             + [.[] | {id: .login, kinds: ["GH_User"], properties: .}]),
+        edges: [.[] | {
+                  start: {match_by: "id", value: .login},
+                  end:   {match_by: "id", value: ($repo)},
+                  kind:  "ContributedTo"
+                },
+                {
+                  start: {match_by: "id",   value: .login},
+                  end:   {match_by: "name", value: .login},
+                  kind:  "MatchesADUser"
+                }]
       }
     }' > "$OUTPUT_FILE"
 

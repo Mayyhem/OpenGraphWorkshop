@@ -24,6 +24,12 @@ foreach ($contributor in $contributors) {
         end   = @{ match_by = "id"; value = "$Repo" }
         kind  = "ContributedTo"
     }
+    # Connect this User to an AD User node by name
+    $edges += @{
+        start = @{ match_by = "id";   value = $contributor.login }
+        end   = @{ match_by = "name"; value = $contributor.login }
+        kind  = "MatchedUser"
+    }
 }
 
 # Wrap in the BloodHound payload format and save to disk

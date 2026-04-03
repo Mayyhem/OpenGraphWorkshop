@@ -22,6 +22,12 @@ for c in contributors:
         "end":   {"match_by": "id", "value": repo},
         "kind":  "ContributedTo",
     })
+    # Connect this User to an AD User node by name
+    edges.append({
+        "start": {"match_by": "id",   "value": c["login"]},
+        "end":   {"match_by": "name", "value": c["login"]},
+        "kind":  "MatchesADUser",
+    })
 
 # Wrap in the BloodHound payload format and save to disk
 with open(output_file, "w", encoding="utf-8") as f:

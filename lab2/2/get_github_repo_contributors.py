@@ -18,7 +18,7 @@ for repo in repos:
     repo_full = repo["full_name"]
     # Only keep scalar (string/number/bool) properties — nested dicts/lists fail schema validation
     repo_props = {k: v for k, v in repo.items() if not isinstance(v, (dict, list)) and v is not None}
-    nodes.append({"id": repo_full, "kinds": ["Repo"], "properties": repo_props})
+    nodes.append({"id": repo_full, "kinds": ["GH_Repo"], "properties": repo_props})
 
     # Fetch contributors for each repo
     contributors = requests.get(f"https://api.github.com/repos/{repo_full}/contributors?per_page=100").json()
@@ -29,7 +29,7 @@ for repo in repos:
         # Only add the user node once (they may contribute to multiple repos)
         if not any(n["id"] == c["login"] for n in nodes):
             user_props = {k: v for k, v in c.items() if not isinstance(v, (dict, list)) and v is not None}
-            nodes.append({"id": c["login"], "kinds": ["User"], "properties": user_props})
+            nodes.append({"id": c["login"], "kinds": ["GH_User"], "properties": user_props})
         edges.append({
             "start": {"match_by": "id", "value": c["login"]},
             "end":   {"match_by": "id", "value": repo_full},
