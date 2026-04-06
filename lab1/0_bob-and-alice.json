@@ -25,7 +25,7 @@
         "start": {
           "value": "B1"
         },
-        "kind": "Knows",
+        "kind": "OG_Knows",
         "end": {
           "value": "A1"
         },
@@ -35,7 +35,7 @@
         "start": {
           "value": "A1"
         },
-        "kind": "Knows",
+        "kind": "OG_Knows",
         "end": {
           "value": "B1"
         },

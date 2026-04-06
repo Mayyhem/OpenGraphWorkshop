@@ -1,6 +1,6 @@
 {
   "custom_types": {
-    "Person": {
+    "OG_Person": {
       "icon": {
         "type": "font-awesome",
         "name": "face-smile",

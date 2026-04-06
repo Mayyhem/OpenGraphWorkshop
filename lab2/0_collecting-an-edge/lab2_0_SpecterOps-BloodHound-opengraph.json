@@ -403,6 +403,34 @@
         }
       },
       {
+        "id": "elikmiller",
+        "kinds": [
+          "GH_User"
+        ],
+        "properties": {
+          "login": "elikmiller",
+          "id": 1761629,
+          "node_id": "MDQ6VXNlcjE3NjE2Mjk=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/1761629?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/elikmiller",
+          "html_url": "https://github.com/elikmiller",
+          "followers_url": "https://api.github.com/users/elikmiller/followers",
+          "following_url": "https://api.github.com/users/elikmiller/following{/other_user}",
+          "gists_url": "https://api.github.com/users/elikmiller/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/elikmiller/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/elikmiller/subscriptions",
+          "organizations_url": "https://api.github.com/users/elikmiller/orgs",
+          "repos_url": "https://api.github.com/users/elikmiller/repos",
+          "events_url": "https://api.github.com/users/elikmiller/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/elikmiller/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false,
+          "contributions": 55
+        }
+      },
+      {
         "id": "JonasBK",
         "kinds": [
           "GH_User"
@@ -428,34 +456,6 @@
           "user_view_type": "public",
           "site_admin": false,
           "contributions": 55
-        }
-      },
-      {
-        "id": "elikmiller",
-        "kinds": [
-          "GH_User"
-        ],
-        "properties": {
-          "login": "elikmiller",
-          "id": 1761629,
-          "node_id": "MDQ6VXNlcjE3NjE2Mjk=",
-          "avatar_url": "https://avatars.githubusercontent.com/u/1761629?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/elikmiller",
-          "html_url": "https://github.com/elikmiller",
-          "followers_url": "https://api.github.com/users/elikmiller/followers",
-          "following_url": "https://api.github.com/users/elikmiller/following{/other_user}",
-          "gists_url": "https://api.github.com/users/elikmiller/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/elikmiller/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/elikmiller/subscriptions",
-          "organizations_url": "https://api.github.com/users/elikmiller/orgs",
-          "repos_url": "https://api.github.com/users/elikmiller/repos",
-          "events_url": "https://api.github.com/users/elikmiller/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/elikmiller/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false,
-          "contributions": 54
         }
       },
       {
@@ -2577,7 +2577,7 @@
       {
         "start": {
           "match_by": "id",
-          "value": "JonasBK"
+          "value": "elikmiller"
         },
         "end": {
           "match_by": "id",
@@ -2588,7 +2588,7 @@
       {
         "start": {
           "match_by": "id",
-          "value": "elikmiller"
+          "value": "JonasBK"
         },
         "end": {
           "match_by": "id",

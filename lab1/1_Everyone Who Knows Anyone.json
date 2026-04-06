@@ -1,1 +1,1 @@
-{"query":"MATCH p = ()-[:Knows]-()\nRETURN p","name":"Everyone Who Knows Anyone","description":""}
+{"query":"MATCH p = ()-[:OG_Knows]-()\nRETURN p","name":"Everyone Who Knows Anyone","description":""}

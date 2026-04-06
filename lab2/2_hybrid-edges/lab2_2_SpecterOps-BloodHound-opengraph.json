@@ -1695,16 +1695,6 @@
         }
       },
       {
-        "id": "x:cmaddalena",
-        "kinds": [
-          "X_User"
-        ],
-        "properties": {
-          "login": "cmaddalena",
-          "url": "https://x.com/cmaddalena"
-        }
-      },
-      {
         "id": "uidzeroo",
         "kinds": [
           "GH_User"
@@ -3193,17 +3183,6 @@
           "value": "SpecterOps/BloodHound"
         },
         "kind": "GH_ContributedTo"
-      },
-      {
-        "start": {
-          "match_by": "id",
-          "value": "chrismaddalena"
-        },
-        "end": {
-          "match_by": "id",
-          "value": "x:cmaddalena"
-        },
-        "kind": "GH_MatchesUser"
       },
       {
         "start": {
