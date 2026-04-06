@@ -1,0 +1,51 @@
+{
+  "schema": {
+    "name": "GH",
+    "display_name": "GH",
+    "version": "v0.0.1",
+    "namespace": "GH"
+  },
+  "node_kinds": [
+    {
+      "name": "GH_Organization",
+      "display_name": "Organization",
+      "description": "",
+      "is_display_kind": true,
+      "icon": "building-flag",
+      "color": "#5FED83"
+    },
+    {
+      "name": "GH_Repo",
+      "display_name": "Repo",
+      "description": "",
+      "is_display_kind": true,
+      "icon": "book",
+      "color": "#9EECFF"
+    },
+    {
+      "name": "GH_User",
+      "display_name": "User",
+      "description": "",
+      "is_display_kind": true,
+      "icon": "user",
+      "color": "#FF8E40"
+    }
+  ],
+  "relationship_kinds": [
+    {
+      "name": "GH_ContributedTo",
+      "description": "",
+      "is_traversable": true
+    }
+  ],
+  "environments": [
+    {
+      "environment_kind": "GH_Organization",
+      "source_kind": "GH",
+      "principal_kinds": [
+        "GH_Repo",
+        "GH_User"
+      ]
+    }
+  ]
+}

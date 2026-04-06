@@ -3,8 +3,8 @@
 param($Org = "SpecterOps")
 $OutputFile = "$Org-opengraph.json"
 
-# Fetch up to 10 public repos for the org
-$apiUrl = "https://api.github.com/orgs/$Org/repos?per_page=10"
+# Fetch up to 5 public repos for the org
+$apiUrl = "https://api.github.com/orgs/$Org/repos?per_page=5"
 Write-Verbose "GET $apiUrl"
 $repos = Invoke-RestMethod -Uri $apiUrl
 Write-Verbose ($repos | ConvertTo-Json -Depth 5)
@@ -43,7 +43,7 @@ foreach ($repo in $repos) {
         $edges += @{
             start = @{ match_by = "id"; value = $contributor.login }
             end   = @{ match_by = "id"; value = $repoFull }
-            kind  = "ContributedTo"
+            kind  = "GH_ContributedTo"
         }
     }
 }

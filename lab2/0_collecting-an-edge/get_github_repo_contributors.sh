@@ -27,7 +27,7 @@ curl -s "https://api.github.com/repos/$REPO/contributors?per_page=100" \
           [.[] | {
             start: {match_by: "id", value: .login},
             end:   {match_by: "id", value: ($repo)},
-            kind:  "ContributedTo"
+            kind:  "GH_ContributedTo"
           }]
       }
     }' > "$OUTPUT_FILE"

@@ -20,7 +20,7 @@ for c in contributors:
     edges.append({
         "start": {"match_by": "id", "value": c["login"]},
         "end":   {"match_by": "id", "value": repo},
-        "kind":  "ContributedTo",
+        "kind":  "GH_ContributedTo",
     })
 
 # Wrap in the BloodHound payload format and save to disk

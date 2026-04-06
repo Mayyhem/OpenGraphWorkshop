@@ -22,13 +22,23 @@ foreach ($contributor in $contributors) {
     $edges += @{
         start = @{ match_by = "id"; value = $contributor.login }
         end   = @{ match_by = "id"; value = "$Repo" }
-        kind  = "ContributedTo"
+        kind  = "GH_ContributedTo"
     }
-    # Connect this User to an AD User node by name
-    $edges += @{
-        start = @{ match_by = "id";   value = $contributor.login }
-        end   = @{ match_by = "name"; value = $contributor.login }
-        kind  = "MatchedUser"
+    # Check if the user has an X (Twitter) handle on their GitHub profile
+    $userInfo = Invoke-RestMethod -Uri "https://api.github.com/users/$($contributor.login)"
+    $twitter = $userInfo.twitter_username
+    if ($twitter) {
+        $xId = "x:$twitter"
+        $xUrl = "https://x.com/$twitter"
+        $nodes += @{ id = $xId; kinds = @("X_User"); properties = @{ login = $twitter; url = $xUrl } }
+        $edges += @{
+            start = @{ match_by = "id"; value = $contributor.login }
+            end   = @{ match_by = "id"; value = $xId }
+            kind  = "GH_MatchesUser"
+        }
+        Write-Host "  [+] X match: $($contributor.login) -> @$twitter"
+    } else {
+        Write-Host "  [-] No X handle: $($contributor.login)"
     }
 }
 

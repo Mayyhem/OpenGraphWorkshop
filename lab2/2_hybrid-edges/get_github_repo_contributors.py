@@ -9,6 +9,9 @@ repo = args.repo
 output_file = f"{repo.replace('/', '-')}-opengraph.json"
 
 contributors = requests.get(f"https://api.github.com/repos/{repo}/contributors?per_page=100").json()
+if isinstance(contributors, dict) and "message" in contributors:
+    print(f"Error from GitHub API: {contributors['message']}")
+    exit(1)
 
 # Start the graph with the repo as the only node
 nodes = [{"id": repo, "kinds": ["GH_Repo"], "properties": {"name": repo}}]
@@ -20,14 +23,23 @@ for c in contributors:
     edges.append({
         "start": {"match_by": "id", "value": c["login"]},
         "end":   {"match_by": "id", "value": repo},
-        "kind":  "ContributedTo",
+        "kind":  "GH_ContributedTo",
     })
-    # Connect this User to an AD User node by name
-    edges.append({
-        "start": {"match_by": "id",   "value": c["login"]},
-        "end":   {"match_by": "name", "value": c["login"]},
-        "kind":  "MatchesADUser",
-    })
+    # Check if the user has an X (Twitter) handle on their GitHub profile
+    user_info = requests.get(f"https://api.github.com/users/{c['login']}").json()
+    twitter = user_info.get("twitter_username")
+    if twitter:
+        x_id = f"x:{twitter}"
+        x_url = f"https://x.com/{twitter}"
+        nodes.append({"id": x_id, "kinds": ["X_User"], "properties": {"login": twitter, "url": x_url}})
+        edges.append({
+            "start": {"match_by": "id", "value": c["login"]},
+            "end":   {"match_by": "id", "value": x_id},
+            "kind":  "GH_MatchesUser",
+        })
+        print(f"  [+] X match: {c['login']} -> @{twitter}")
+    else:
+        print(f"  [-] No X handle: {c['login']}")
 
 # Wrap in the BloodHound payload format and save to disk
 with open(output_file, "w", encoding="utf-8") as f:

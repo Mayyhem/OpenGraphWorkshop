@@ -2,8 +2,8 @@
 ORG="${1:-SpecterOps}"
 OUTPUT_FILE="${ORG}-opengraph.json"
 
-# Fetch up to 10 public repos for the org
-REPOS_JSON=$(curl -s "https://api.github.com/orgs/$ORG/repos?per_page=10")
+# Fetch up to 5 public repos for the org
+REPOS_JSON=$(curl -s "https://api.github.com/orgs/$ORG/repos?per_page=5")
 
 # Collect per-repo contributor data as newline-delimited JSON blobs
 ALL_CONTRIBUTORS=""
@@ -34,7 +34,7 @@ jq -n --argjson repos "$REPOS_JSON" --argjson contributors "$FLAT_CONTRIBUTORS" 
   [ $contributors[] |
     { start: { match_by: "id", value: .login },
       end:   { match_by: "id", value: ._repo },
-      kind:  "ContributedTo" }
+      kind:  "GH_ContributedTo" }
   ] as $edges |
 
   { graph: { nodes: ($repo_nodes + $user_nodes), edges: $edges } }

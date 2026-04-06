@@ -4,7 +4,7 @@
       {
         "id": "B1",
         "kinds": [
-          "Person"
+          "OG_Person"
         ],
         "properties": {
           "name": "BOB"
@@ -13,7 +13,7 @@
       {
         "id": "A1",
         "kinds": [
-          "Person"
+          "OG_Person"
         ],
         "properties": {
           "name": "ALICE"

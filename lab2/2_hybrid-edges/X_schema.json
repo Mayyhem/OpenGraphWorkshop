@@ -1,0 +1,29 @@
+{
+  "schema": {
+    "name": "X",
+    "display_name": "X",
+    "version": "v0.0.1",
+    "namespace": "X"
+  },
+  "node_kinds": [
+    {
+      "name": "X_User",
+      "display_name": "User",
+      "description": "",
+      "is_display_kind": true,
+      "icon": "user",
+      "color": "#f5ef42"
+    }
+  ],
+  "relationship_kinds": [
+  ],
+  "environments": [
+    {
+      "environment_kind": "X_User",
+      "source_kind": "X",
+      "principal_kinds": [
+        "X_User"
+      ]
+    }
+  ]
+}

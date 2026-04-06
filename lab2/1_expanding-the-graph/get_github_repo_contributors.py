@@ -8,8 +8,8 @@ args = parser.parse_args()
 org = args.org
 output_file = f"{org}-opengraph.json"
 
-# Fetch up to 10 public repos for the org
-repos = requests.get(f"https://api.github.com/orgs/{org}/repos?per_page=10").json()
+# Fetch up to 5 public repos for the org
+repos = requests.get(f"https://api.github.com/orgs/{org}/repos?per_page=5").json()
 
 nodes = []
 edges = []
@@ -33,7 +33,7 @@ for repo in repos:
         edges.append({
             "start": {"match_by": "id", "value": c["login"]},
             "end":   {"match_by": "id", "value": repo_full},
-            "kind":  "ContributedTo",
+            "kind":  "GH_ContributedTo",
         })
 
 with open(output_file, "w", encoding="utf-8") as f:
