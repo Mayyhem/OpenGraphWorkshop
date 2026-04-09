@@ -38,3 +38,6 @@ bash MAC_install-bhce-pathfinding.sh
 > **Windows note:** You will be prompted to overwrite YAML files twice. Answer **Y** the first time and **N** the second time.
 
 After installation, BloodHound CE will be running with OpenGraph support at `http://localhost:8080`.
+
+## References
+- https://bloodhound.specterops.io/opengraph/developer/requirements

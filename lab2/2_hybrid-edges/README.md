@@ -2,6 +2,22 @@
 
 Link GitHub users to their X (Twitter) profiles by looking up each contributor's GitHub profile for a `twitter_username` field. This demonstrates cross-source graph analysis.
 
+## Concepts
+- To create a hybrid edge, leverage the `match_by` edge property to connect two nodes from disparate technologies by their `id` (or other properties):
+    ```
+    {
+    "start": {
+        "match_by": "id",
+        "value": "GH:Mayyhem"
+    },
+    "end": {
+        "match_by": "id",
+        "value": "x:_Mayyhem"
+    },
+    "kind": "GH_MatchesUser"
+    }
+    ```
+
 ## Schemas
 
 Two schemas need to be uploaded:
@@ -73,3 +89,6 @@ Each script outputs a JSON file named `lab2_2_<owner>-<repo>-opengraph.json` and
     OR
     
     b. Navigate to `Saved Queries`, click `Import`, and select and upload the `cypher_query*` files. Then, navigate to `Source > Personal` to try each of the three cypher queries to explore the graph.
+
+## References
+- https://bloodhound.specterops.io/opengraph/developer/schema#edge-endpoint-matching

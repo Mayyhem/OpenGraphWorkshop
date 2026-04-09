@@ -4,9 +4,15 @@ Build a simple social graph with two people (Bob and Alice) to learn core OpenGr
 
 ## Concepts
 
-- **Schema** — Defines node kinds (e.g., `OG_Person`) and relationship kinds (e.g., `OG_Knows`)
+- **Schema** 
+    - Define node kinds (e.g., `OG_Person`) and relationship kinds (e.g., `OG_Knows`)
+    - Edge/node classes MUST start with the extension namespace defined in the schema followed by an underscore (e.g., `OG_`)
+    - Edges marked as traversable MUST allow the source node to fully control the destination node, such that the source can also follow all outbound traversable edges from the destination
 - **Nodes** — Entities in the graph (Bob, Alice)
+    - The `id` property MUST be GLOBALLY unique (not just unique within your extension, so properties like names are bad IDs)
+    - Nodes MUST have a `name` property to populate Search/Pathfinding predictive text
 - **Edges** — Relationships between nodes (Bob knows Alice)
+    - Match by object `id` (default), `name`, or properties
 - **Cypher queries** — Graph query language for finding patterns
 
 ## Files
@@ -23,11 +29,11 @@ Build a simple social graph with two people (Bob and Alice) to learn core OpenGr
 ## Steps
 
 1. 
-    a. **Upload the schema** — In BloodHound, navigate to `Administration > OpenGraph Management` and upload `schema_OG.json` 
+    a. **Upload the schema** — IMPORTANT: This is REQUIRED for Search/Pathfinding to work. In BloodHound, navigate to `Administration > OpenGraph Management` and upload `schema_OG.json` 
   
     OR 
 
-    b. **Upload the custom icon** — In BloodHound, navigate to `Administration > API Explorer`, type `custom-nodes`, select `POST /api/v2/custom-nodes`, click `Try it out`, paste `custom-icon_OG_Person.json`, then click `Execute` to set the icon for `OG_Person` nodes
+    b. **Upload the custom icon** — IMPORTANT: This will ONLY update the node icon. In BloodHound, navigate to `Administration > API Explorer`, type `custom-nodes`, select `POST /api/v2/custom-nodes`, click `Try it out`, paste `custom-icon_OG_Person.json`, then click `Execute` to set the icon for `OG_Person` nodes
 
 2. **Upload the collected data** — In BloodHound, navigate to `Quick Upload`, then upload `collected_data_OG_bob-and-alice.json` to populate the graph
 
@@ -56,3 +62,11 @@ Build a simple social graph with two people (Bob and Alice) to learn core OpenGr
     OR
     
     b. Navigate to `Saved Queries`, click `Import`, and select and upload the `cypher_query*` files. Then, navigate to `Source > Personal` to try each of the three cypher queries to explore the graph.
+
+## References
+- https://bloodhound.specterops.io/opengraph/developer/requirements
+- https://bloodhound.specterops.io/opengraph/developer/schema
+- https://bloodhound.specterops.io/opengraph/developer/schema#edge-endpoint-matching
+- https://bloodhound.specterops.io/opengraph/developer/custom-icons
+- https://bloodhound.specterops.io/opengraph/developer/api
+- https://queries.specterops.io/

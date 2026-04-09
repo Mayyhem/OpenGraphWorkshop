@@ -42,11 +42,10 @@ Each script outputs a JSON file named `lab2_1_<org>-opengraph.json`.
     
     a. Paste the following cypher query and click `Run` to explore the graph:
     ```
-    MATCH p = ()-[:GH_ContributedTo]->(repo:GH_Repo)
-    WHERE repo.name = "SPECTEROPS/BLOODHOUND"
+    MATCH p = ()-[:GH_ContributedTo]->()
     RETURN p
     ```
     
     OR
     
-    b. Navigate to `Saved Queries`, click `Import`, and select and upload the ``cypher_query_4_Contributors to BloodHound GitHub Repo.json` file. Then, navigate to `Source > Personal` to try the cypher query to explore the graph.
+    b. Navigate to `Saved Queries`, click `Import`, and select and upload the `cypher_query_5_Contributors to Repos in Organization.json` file. Then, navigate to `Source > Personal` to try the cypher query to explore the graph.

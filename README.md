@@ -1,6 +1,8 @@
 # OpenGraph Workshop
 
-A hands-on workshop for learning [BloodHound](https://github.com/SpecterOps/BloodHound) OpenGraph — a framework for connecting multiple data sources into a unified graph for analysis.
+A hands-on workshop for learning [BloodHound OpenGraph](https://specterops.io/opengraph/) — a framework for connecting multiple data sources into a unified graph for analysis.
+
+This repository is a complement to the Build Your Own OpenGraph Collector Workshop presented at [SO-CON 2026](https://specterops.io/so-con/) by Mat Soulnier ([@Scoubi](https://x.com/ScoubiMtl)) and Chris Thompson ([@_Mayyhem](https://x.com/_Mayyhem)).
 
 ## Prerequisites
 
@@ -11,9 +13,9 @@ A hands-on workshop for learning [BloodHound](https://github.com/SpecterOps/Bloo
 
 ```
 OpenGraphWorkshop/
-├── install-bloodhound/   # Automated BloodHound CE + OpenGraph install scripts
-├── lab1/                 # Lab 1: OpenGraph fundamentals (nodes, edges, schemas)
-└── lab2/                 # Lab 2: Real-world data collection
+├── install-bloodhound/          # Automated BloodHound CE + OpenGraph install scripts
+├── lab1/                        # Lab 1: OpenGraph fundamentals (nodes, edges, schemas)
+└── lab2/                        # Lab 2: Real-world data collection
     ├── 0_collecting-an-edge/    # Single repo contributor graph
     ├── 1_expanding-the-graph/   # Multi-repo organization graph
     └── 2_hybrid-edges/          # Cross-source GitHub + X (Twitter) graph
@@ -29,3 +31,8 @@ OpenGraphWorkshop/
    - **[Lab 2.2](lab2/2_hybrid-edges/)** — Link GitHub users to X (Twitter) profiles with cross-source hybrid edges
 
 Each lab includes pre-collected sample data so you can follow along without making API calls.
+
+## Resources
+- https://bloodhound.specterops.io/opengraph/developer
+- https://bloodhound.specterops.io/opengraph/developer/graph-theory
+
