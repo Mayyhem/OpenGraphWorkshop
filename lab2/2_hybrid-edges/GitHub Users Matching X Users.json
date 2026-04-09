@@ -1,1 +1,0 @@
-{"query":"MATCH p = ()-[:GH_MatchesUser]-\u003e()\nRETURN p","name":"GitHub Users Matching X Users","description":""}

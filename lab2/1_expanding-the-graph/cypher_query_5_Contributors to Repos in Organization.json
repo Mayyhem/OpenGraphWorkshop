@@ -1,0 +1,1 @@
+{"query":"MATCH p = ()-[:GH_ContributedTo]-\u003e()\nRETURN p","name":"5. Contributors to GitHub Repos in Organization","description":""}

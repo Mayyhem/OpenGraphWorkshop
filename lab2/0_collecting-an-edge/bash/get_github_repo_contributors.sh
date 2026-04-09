@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 REPO="${1:-SpecterOps/BloodHound}"
-OUTPUT_FILE="${REPO//\//-}-opengraph.json"
+OUTPUT_FILE="lab2_0_${REPO//\//-}-opengraph.json"
 
 # Fetch contributors and pipe the JSON into jq to reshape it
 #
@@ -19,14 +19,15 @@ OUTPUT_FILE="${REPO//\//-}-opengraph.json"
 #       start = this contributor, end = the repo
 curl -s "https://api.github.com/repos/$REPO/contributors?per_page=100" \
   | jq --arg repo "$REPO" '{
+      metadata: {source_kind: "GH"},
       graph: {
         nodes:
-          ([{id: ($repo), kinds: ["GH_Repo"], properties: {name: ($repo)}}]
-          + [.[] | {id: .login, kinds: ["GH_User"], properties: .}]),
+          ([{id: ("GH:" + $repo), kinds: ["GH_Repo"], properties: {name: ($repo)}}]
+          + [.[] | {id: ("GH:" + .login), kinds: ["GH_User"], properties: (. + {name: .login})}]),
         edges:
           [.[] | {
-            start: {match_by: "id", value: .login},
-            end:   {match_by: "id", value: ($repo)},
+            start: {match_by: "id", value: ("GH:" + .login)},
+            end:   {match_by: "id", value: ("GH:" + $repo)},
             kind:  "GH_ContributedTo"
           }]
       }

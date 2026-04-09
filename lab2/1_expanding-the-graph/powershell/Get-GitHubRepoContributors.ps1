@@ -1,7 +1,7 @@
 #!/usr/bin/env pwsh
 [CmdletBinding()]
 param($Org = "SpecterOps")
-$OutputFile = "$Org-opengraph.json"
+$OutputFile = "lab2_1_$Org-opengraph.json"
 
 # Fetch up to 5 public repos for the org
 $apiUrl = "https://api.github.com/orgs/$Org/repos?per_page=5"
@@ -19,7 +19,7 @@ foreach ($repo in $repos) {
     # Add repo node — only keep scalar properties (strings, numbers, bools)
     $repoProps = @{}
     $repo.PSObject.Properties | Where-Object { $null -ne $_.Value -and $_.Value -isnot [System.Management.Automation.PSObject] -and $_.Value -isnot [System.Array] } | ForEach-Object { $repoProps[$_.Name] = $_.Value }
-    $nodes += @{ id = $repoFull; kinds = @("GH_Repo"); properties = $repoProps }
+    $nodes += @{ id = "GH:$repoFull"; kinds = @("GH_Repo"); properties = $repoProps }
 
     # Fetch contributors for this repo
     $contribUrl = "https://api.github.com/repos/$repoFull/contributors?per_page=100"
@@ -36,19 +36,20 @@ foreach ($repo in $repos) {
         if (-not $seenUsers.ContainsKey($contributor.login)) {
             $props = @{}
             $contributor.PSObject.Properties | Where-Object { $null -ne $_.Value -and $_.Value -isnot [System.Management.Automation.PSObject] -and $_.Value -isnot [System.Array] } | ForEach-Object { $props[$_.Name] = $_.Value }
-            $nodes += @{ id = $contributor.login; kinds = @("GH_User"); properties = $props }
+            $props["name"] = $contributor.login
+            $nodes += @{ id = "GH:$($contributor.login)"; kinds = @("GH_User"); properties = $props }
             $seenUsers[$contributor.login] = $true
         }
 
         $edges += @{
-            start = @{ match_by = "id"; value = $contributor.login }
-            end   = @{ match_by = "id"; value = $repoFull }
+            start = @{ match_by = "id"; value = "GH:$($contributor.login)" }
+            end   = @{ match_by = "id"; value = "GH:$repoFull" }
             kind  = "GH_ContributedTo"
         }
     }
 }
 
 # Wrap in the BloodHound payload format and save to disk
-@{ graph = @{ nodes = $nodes; edges = $edges } } | ConvertTo-Json -Depth 10 | Set-Content $OutputFile -Encoding utf8
+@{ metadata = @{ source_kind = "GH" }; graph = @{ nodes = $nodes; edges = $edges } } | ConvertTo-Json -Depth 10 | Set-Content $OutputFile -Encoding utf8
 
 Write-Host "Done! Wrote $($nodes.Count) nodes and $($edges.Count) edges to: $OutputFile"

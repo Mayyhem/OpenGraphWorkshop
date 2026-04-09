@@ -6,7 +6,7 @@ parser.add_argument("repo", nargs="?", default="SpecterOps/BloodHound")
 args = parser.parse_args()
 
 repo = args.repo
-output_file = f"{repo.replace('/', '-')}-opengraph.json"
+output_file = f"lab2_2_{repo.replace('/', '-')}-opengraph.json"
 
 contributors = requests.get(f"https://api.github.com/repos/{repo}/contributors?per_page=100").json()
 if isinstance(contributors, dict) and "message" in contributors:
@@ -14,15 +14,15 @@ if isinstance(contributors, dict) and "message" in contributors:
     exit(1)
 
 # Start the graph with the repo as the only node
-nodes = [{"id": repo, "kinds": ["GH_Repo"], "properties": {"name": repo}}]
+nodes = [{"id": f"GH:{repo}", "kinds": ["GH_Repo"], "properties": {"name": repo}}]
 edges = []
 
 # Add each contributor as a node, and draw an edge from them to the repo
 for c in contributors:
-    nodes.append({"id": c["login"], "kinds": ["GH_User"], "properties": c})
+    nodes.append({"id": f"GH:{c['login']}", "kinds": ["GH_User"], "properties": {**c, "name": c['login']}})
     edges.append({
-        "start": {"match_by": "id", "value": c["login"]},
-        "end":   {"match_by": "id", "value": repo},
+        "start": {"match_by": "id", "value": f"GH:{c['login']}"},
+        "end":   {"match_by": "id", "value": f"GH:{repo}"},
         "kind":  "GH_ContributedTo",
     })
     # Check if the user has an X (Twitter) handle on their GitHub profile
@@ -31,9 +31,9 @@ for c in contributors:
     if twitter:
         x_id = f"x:{twitter}"
         x_url = f"https://x.com/{twitter}"
-        nodes.append({"id": x_id, "kinds": ["X_User"], "properties": {"login": twitter, "url": x_url}})
+        nodes.append({"id": x_id, "kinds": ["X_User"], "properties": {"login": twitter, "name": twitter, "url": x_url}})
         edges.append({
-            "start": {"match_by": "id", "value": c["login"]},
+            "start": {"match_by": "id", "value": f"GH:{c['login']}"},
             "end":   {"match_by": "id", "value": x_id},
             "kind":  "GH_MatchesUser",
         })
@@ -43,6 +43,6 @@ for c in contributors:
 
 # Wrap in the BloodHound payload format and save to disk
 with open(output_file, "w", encoding="utf-8") as f:
-    json.dump({"graph": {"nodes": nodes, "edges": edges}}, f, indent=2)
+    json.dump({"metadata": {"source_kind": "GH"}, "graph": {"nodes": nodes, "edges": edges}}, f, indent=2)
 
 print(f"Done! Wrote {len(nodes)} nodes and {len(edges)} edges to: {output_file}")

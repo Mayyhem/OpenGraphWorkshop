@@ -31,4 +31,6 @@ Read-Host "You will be prompted to overwrite YAML files. Answer N to both this t
 Start-Sleep -Seconds 10
 
 docker exec bloodhound-app-db-1 psql -U bloodhound -d bloodhound -c "UPDATE feature_flags SET enabled = true WHERE key = 'opengraph_extension_management';"
-docker logs -f bloodhound-bloodhound-1
+
+# Uncomment/execute to show container logs
+#docker logs -f bloodhound-bloodhound-1

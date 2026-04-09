@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 REPO="${1:-SpecterOps/BloodHound}"
-OUTPUT_FILE="${REPO//\//-}-opengraph.json"
+OUTPUT_FILE="lab2_2_${REPO//\//-}-opengraph.json"
 
 # Fetch contributors and pipe the JSON into jq to reshape it
 #
@@ -21,15 +21,15 @@ CONTRIBUTORS_JSON=$(curl -s "https://api.github.com/repos/$REPO/contributors?per
 
 # Build initial graph with GH nodes and edges
 GRAPH=$(echo "$CONTRIBUTORS_JSON" | jq --arg repo "$REPO" '{
+  metadata: {source_kind: "GH"},
   graph: {
-    nodes: ([{id: ($repo), kinds: ["GH_Repo"], properties: {name: ($repo)}}]
-         + [.[] | {id: .login, kinds: ["GH_User"], properties: .}]),
+    nodes: ([{id: ("GH:" + $repo), kinds: ["GH_Repo"], properties: {name: ($repo)}}]
+         + [.[] | {id: ("GH:" + .login), kinds: ["GH_User"], properties: (. + {name: .login})}]),
     edges: [.[] | {
-              start: {match_by: "id", value: .login},
-              end:   {match_by: "id", value: ($repo)},
+              start: {match_by: "id", value: ("GH:" + .login)},
+              end:   {match_by: "id", value: ("GH:" + $repo)},
               kind:  "GH_ContributedTo"
-            },
-]
+            }]
   }
 }')
 
@@ -44,9 +44,9 @@ for login in $(echo "$CONTRIBUTORS_JSON" | jq -r '.[].login'); do
             --arg x_id "$x_id" \
             --arg x_url "$x_url" \
             --arg twitter "$twitter" '
-            .graph.nodes += [{id: $x_id, kinds: ["X_User"], properties: {login: $twitter, url: $x_url}}] |
+            .graph.nodes += [{id: $x_id, kinds: ["X_User"], properties: {login: $twitter, name: $twitter, url: $x_url}}] |
             .graph.edges += [{
-                start: {match_by: "id", value: $login},
+                start: {match_by: "id", value: ("GH:" + $login)},
                 end:   {match_by: "id", value: $x_id},
                 kind:  "GH_MatchesUser"
             }]')
