@@ -1,1 +1,1 @@
-{"query":"MATCH p = ()-[:GH_ContributedTo]-\u003e(repo:GH_Repo)\nWHERE repo.name = \"SPECTEROPS/BLOODHOUND\"\nRETURN p","name":"4. Contributors to BloodHound GitHub Repo","description":""}
+{"query":"MATCH p = (:GH_User)-[:GH_ContributedTo]-\u003e(repo:GH_Repo)\nWHERE repo.name = \"SPECTEROPS/BLOODHOUND\"\nRETURN p","name":"4. Contributors to BloodHound GitHub Repo","description":""}

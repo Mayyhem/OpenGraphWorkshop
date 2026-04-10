@@ -1,1 +1,1 @@
-{"query":"MATCH p = ()-[:GH_ContributedTo]-\u003e()\nRETURN p","name":"5. Contributors to GitHub Repos in Organization","description":""}
+{"query":"MATCH p = ()-[:GH_ContributedTo|GH_Contains]-\u003e()\nRETURN p","name":"5. Contributors to GitHub Repos in Organization","description":""}
