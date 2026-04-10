@@ -7,9 +7,23 @@ Write-Verbose "GET $apiUrl"
 $contributors = Invoke-RestMethod -Uri $apiUrl
 Write-Verbose ($contributors | ConvertTo-Json -Depth 5)
 
-# Start the graph with the repo as the only node
+# Start the graph with the repo node
 $nodes = @( @{ id = "GH:$Repo"; kinds = @("GH_Repo"); properties = @{ name = $Repo } } )
 $edges = @()
+
+# If the repo contains an org (e.g. "SpecterOps/BloodHound"), add the org node and a GH_Contains edge
+if ($Repo -match '/') {
+    $Org = $Repo.Split('/')[0]
+    $orgInfo = Invoke-RestMethod -Uri "https://api.github.com/orgs/$Org"
+    $orgProps = @{}
+    $orgInfo.PSObject.Properties | Where-Object { $null -ne $_.Value -and $_.Value -isnot [System.Management.Automation.PSObject] -and $_.Value -isnot [System.Array] } | ForEach-Object { $orgProps[$_.Name] = $_.Value }
+    $nodes = @(@{ id = "GH:$Org"; kinds = @("GH_Organization"); properties = $orgProps }) + $nodes
+    $edges += @{
+        start = @{ match_by = "id"; value = "GH:$Org" }
+        end   = @{ match_by = "id"; value = "GH:$Repo" }
+        kind  = "GH_Contains"
+    }
+}
 
 # Add each contributor as a node, and draw an edge from them to the repo
 foreach ($contributor in $contributors) {

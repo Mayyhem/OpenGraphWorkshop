@@ -5,6 +5,41 @@
   "graph": {
     "nodes": [
       {
+        "id": "GH:SpecterOps",
+        "kinds": [
+          "GH_Organization"
+        ],
+        "properties": {
+          "login": "SpecterOps",
+          "id": 25406560,
+          "node_id": "MDEyOk9yZ2FuaXphdGlvbjI1NDA2NTYw",
+          "url": "https://api.github.com/orgs/SpecterOps",
+          "repos_url": "https://api.github.com/orgs/SpecterOps/repos",
+          "events_url": "https://api.github.com/orgs/SpecterOps/events",
+          "hooks_url": "https://api.github.com/orgs/SpecterOps/hooks",
+          "issues_url": "https://api.github.com/orgs/SpecterOps/issues",
+          "members_url": "https://api.github.com/orgs/SpecterOps/members{/member}",
+          "public_members_url": "https://api.github.com/orgs/SpecterOps/public_members{/member}",
+          "avatar_url": "https://avatars.githubusercontent.com/u/25406560?v=4",
+          "description": "",
+          "name": "SpecterOps",
+          "blog": "https://specterops.io",
+          "location": "United States of America",
+          "email": "info@specterops.io",
+          "is_verified": true,
+          "has_organization_projects": true,
+          "has_repository_projects": false,
+          "public_repos": 43,
+          "public_gists": 0,
+          "followers": 1147,
+          "following": 0,
+          "html_url": "https://github.com/SpecterOps",
+          "created_at": "2017-01-28T18:34:40Z",
+          "updated_at": "2026-04-08T20:53:05Z",
+          "type": "Organization"
+        }
+      },
+      {
         "id": "GH:SpecterOps/BloodHound",
         "kinds": [
           "GH_Repo"
@@ -270,7 +305,7 @@
           "type": "User",
           "user_view_type": "public",
           "site_admin": false,
-          "contributions": 75,
+          "contributions": 76,
           "name": "maffkipp"
         }
       },
@@ -560,7 +595,7 @@
           "type": "User",
           "user_view_type": "public",
           "site_admin": false,
-          "contributions": 45,
+          "contributions": 47,
           "name": "specter-flq"
         }
       },
@@ -652,35 +687,6 @@
         }
       },
       {
-        "id": "GH:sircodemane",
-        "kinds": [
-          "GH_User"
-        ],
-        "properties": {
-          "login": "sircodemane",
-          "id": 6968902,
-          "node_id": "MDQ6VXNlcjY5Njg5MDI=",
-          "avatar_url": "https://avatars.githubusercontent.com/u/6968902?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/sircodemane",
-          "html_url": "https://github.com/sircodemane",
-          "followers_url": "https://api.github.com/users/sircodemane/followers",
-          "following_url": "https://api.github.com/users/sircodemane/following{/other_user}",
-          "gists_url": "https://api.github.com/users/sircodemane/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/sircodemane/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/sircodemane/subscriptions",
-          "organizations_url": "https://api.github.com/users/sircodemane/orgs",
-          "repos_url": "https://api.github.com/users/sircodemane/repos",
-          "events_url": "https://api.github.com/users/sircodemane/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/sircodemane/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false,
-          "contributions": 41,
-          "name": "sircodemane"
-        }
-      },
-      {
         "id": "GH:LawsonWillard",
         "kinds": [
           "GH_User"
@@ -734,8 +740,37 @@
           "type": "User",
           "user_view_type": "public",
           "site_admin": false,
-          "contributions": 40,
+          "contributions": 41,
           "name": "AD7ZJ"
+        }
+      },
+      {
+        "id": "GH:sircodemane",
+        "kinds": [
+          "GH_User"
+        ],
+        "properties": {
+          "login": "sircodemane",
+          "id": 6968902,
+          "node_id": "MDQ6VXNlcjY5Njg5MDI=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/6968902?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/sircodemane",
+          "html_url": "https://github.com/sircodemane",
+          "followers_url": "https://api.github.com/users/sircodemane/followers",
+          "following_url": "https://api.github.com/users/sircodemane/following{/other_user}",
+          "gists_url": "https://api.github.com/users/sircodemane/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/sircodemane/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/sircodemane/subscriptions",
+          "organizations_url": "https://api.github.com/users/sircodemane/orgs",
+          "repos_url": "https://api.github.com/users/sircodemane/repos",
+          "events_url": "https://api.github.com/users/sircodemane/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/sircodemane/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false,
+          "contributions": 41,
+          "name": "sircodemane"
         }
       },
       {
@@ -1000,6 +1035,35 @@
         }
       },
       {
+        "id": "GH:nicole-m-martin",
+        "kinds": [
+          "GH_User"
+        ],
+        "properties": {
+          "login": "nicole-m-martin",
+          "id": 71411431,
+          "node_id": "MDQ6VXNlcjcxNDExNDMx",
+          "avatar_url": "https://avatars.githubusercontent.com/u/71411431?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/nicole-m-martin",
+          "html_url": "https://github.com/nicole-m-martin",
+          "followers_url": "https://api.github.com/users/nicole-m-martin/followers",
+          "following_url": "https://api.github.com/users/nicole-m-martin/following{/other_user}",
+          "gists_url": "https://api.github.com/users/nicole-m-martin/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/nicole-m-martin/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/nicole-m-martin/subscriptions",
+          "organizations_url": "https://api.github.com/users/nicole-m-martin/orgs",
+          "repos_url": "https://api.github.com/users/nicole-m-martin/repos",
+          "events_url": "https://api.github.com/users/nicole-m-martin/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/nicole-m-martin/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false,
+          "contributions": 16,
+          "name": "nicole-m-martin"
+        }
+      },
+      {
         "id": "GH:catsiller",
         "kinds": [
           "GH_User"
@@ -1055,35 +1119,6 @@
           "site_admin": false,
           "contributions": 15,
           "name": "sblotner"
-        }
-      },
-      {
-        "id": "GH:nicole-m-martin",
-        "kinds": [
-          "GH_User"
-        ],
-        "properties": {
-          "login": "nicole-m-martin",
-          "id": 71411431,
-          "node_id": "MDQ6VXNlcjcxNDExNDMx",
-          "avatar_url": "https://avatars.githubusercontent.com/u/71411431?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/nicole-m-martin",
-          "html_url": "https://github.com/nicole-m-martin",
-          "followers_url": "https://api.github.com/users/nicole-m-martin/followers",
-          "following_url": "https://api.github.com/users/nicole-m-martin/following{/other_user}",
-          "gists_url": "https://api.github.com/users/nicole-m-martin/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/nicole-m-martin/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/nicole-m-martin/subscriptions",
-          "organizations_url": "https://api.github.com/users/nicole-m-martin/orgs",
-          "repos_url": "https://api.github.com/users/nicole-m-martin/repos",
-          "events_url": "https://api.github.com/users/nicole-m-martin/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/nicole-m-martin/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false,
-          "contributions": 15,
-          "name": "nicole-m-martin"
         }
       },
       {
@@ -2541,6 +2576,17 @@
       {
         "start": {
           "match_by": "id",
+          "value": "GH:SpecterOps"
+        },
+        "end": {
+          "match_by": "id",
+          "value": "GH:SpecterOps/BloodHound"
+        },
+        "kind": "GH_Contains"
+      },
+      {
+        "start": {
+          "match_by": "id",
           "value": "GH:mistahj67"
         },
         "end": {
@@ -2783,17 +2829,6 @@
       {
         "start": {
           "match_by": "id",
-          "value": "GH:sircodemane"
-        },
-        "end": {
-          "match_by": "id",
-          "value": "GH:SpecterOps/BloodHound"
-        },
-        "kind": "GH_ContributedTo"
-      },
-      {
-        "start": {
-          "match_by": "id",
           "value": "GH:LawsonWillard"
         },
         "end": {
@@ -2806,6 +2841,17 @@
         "start": {
           "match_by": "id",
           "value": "GH:AD7ZJ"
+        },
+        "end": {
+          "match_by": "id",
+          "value": "GH:SpecterOps/BloodHound"
+        },
+        "kind": "GH_ContributedTo"
+      },
+      {
+        "start": {
+          "match_by": "id",
+          "value": "GH:sircodemane"
         },
         "end": {
           "match_by": "id",
@@ -2915,6 +2961,17 @@
       {
         "start": {
           "match_by": "id",
+          "value": "GH:nicole-m-martin"
+        },
+        "end": {
+          "match_by": "id",
+          "value": "GH:SpecterOps/BloodHound"
+        },
+        "kind": "GH_ContributedTo"
+      },
+      {
+        "start": {
+          "match_by": "id",
           "value": "GH:catsiller"
         },
         "end": {
@@ -2927,17 +2984,6 @@
         "start": {
           "match_by": "id",
           "value": "GH:sblotner"
-        },
-        "end": {
-          "match_by": "id",
-          "value": "GH:SpecterOps/BloodHound"
-        },
-        "kind": "GH_ContributedTo"
-      },
-      {
-        "start": {
-          "match_by": "id",
-          "value": "GH:nicole-m-martin"
         },
         "end": {
           "match_by": "id",

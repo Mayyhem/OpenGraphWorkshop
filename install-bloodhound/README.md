@@ -24,7 +24,7 @@ bash MAC_install-bhce-pathfinding.sh
 
 **Windows (PowerShell):**
 ```powershell
-.\POWERSHELL_install-bhce-pathfinding.ps1
+.\WINDOWS_install-bhce-pathfinding.ps1
 ```
 
 ## What the Scripts Do

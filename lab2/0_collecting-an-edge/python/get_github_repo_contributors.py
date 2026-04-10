@@ -10,9 +10,21 @@ output_file = f"lab2_0_{repo.replace('/', '-')}-opengraph.json"
 
 contributors = requests.get(f"https://api.github.com/repos/{repo}/contributors?per_page=100").json()
 
-# Start the graph with the repo as the only node
+# Start the graph with the repo node
 nodes = [{"id": f"GH:{repo}", "kinds": ["GH_Repo"], "properties": {"name": repo}}]
 edges = []
+
+# If the repo contains an org (e.g. "SpecterOps/BloodHound"), add the org node and a GH_Contains edge
+if "/" in repo:
+    org = repo.split("/")[0]
+    org_info = requests.get(f"https://api.github.com/orgs/{org}").json()
+    org_props = {k: v for k, v in org_info.items() if not isinstance(v, (dict, list)) and v is not None}
+    nodes.insert(0, {"id": f"GH:{org}", "kinds": ["GH_Organization"], "properties": org_props})
+    edges.append({
+        "start": {"match_by": "id", "value": f"GH:{org}"},
+        "end":   {"match_by": "id", "value": f"GH:{repo}"},
+        "kind":  "GH_Contains",
+    })
 
 # Add each contributor as a node, and draw an edge from them to the repo
 for c in contributors:

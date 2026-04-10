@@ -67,6 +67,7 @@ Build a simple social graph with two people (Bob and Alice) to learn core OpenGr
 - https://bloodhound.specterops.io/opengraph/developer/requirements
 - https://bloodhound.specterops.io/opengraph/developer/schema
 - https://bloodhound.specterops.io/opengraph/developer/schema#edge-endpoint-matching
+- https://bloodhound.specterops.io/resources/edges/traversable-edges
 - https://bloodhound.specterops.io/opengraph/developer/custom-icons
 - https://bloodhound.specterops.io/opengraph/developer/api
 - https://queries.specterops.io/

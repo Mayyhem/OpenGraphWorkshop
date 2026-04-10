@@ -33,6 +33,11 @@
   ],
   "relationship_kinds": [
     {
+      "name": "GH_Contains",
+      "description": "",
+      "is_traversable": true
+    },
+    {
       "name": "GH_ContributedTo",
       "description": "",
       "is_traversable": true

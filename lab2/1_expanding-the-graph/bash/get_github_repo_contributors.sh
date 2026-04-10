@@ -2,7 +2,8 @@
 ORG="${1:-SpecterOps}"
 OUTPUT_FILE="lab2_1_${ORG}-opengraph.json"
 
-# Fetch up to 5 public repos for the org
+# Fetch org details and up to 5 public repos
+ORG_JSON=$(curl -s "https://api.github.com/orgs/$ORG")
 REPOS_JSON=$(curl -s "https://api.github.com/orgs/$ORG/repos?per_page=5")
 
 # Collect per-repo contributor data as newline-delimited JSON blobs
@@ -18,9 +19,12 @@ done
 # Build the full graph in a single jq pass
 FLAT_CONTRIBUTORS=$(echo "$ALL_CONTRIBUTORS" | jq -s 'add // []')
 
-jq -n --argjson repos "$REPOS_JSON" --argjson contributors "$FLAT_CONTRIBUTORS" '
+jq -n --argjson org "$ORG_JSON" --argjson repos "$REPOS_JSON" --argjson contributors "$FLAT_CONTRIBUTORS" '
   # Helper: keep only scalar, non-null properties
   def scalar_props: with_entries(select(.value != null and (.value | type != "object" and type != "array")));
+
+  # Organization node
+  [{ id: ("GH:" + $org.login), kinds: ["GH_Organization"], properties: ($org | scalar_props) }] as $org_node |
 
   # Repo nodes
   ($repos | map({ id: ("GH:" + .full_name), kinds: ["GH_Repo"], properties: scalar_props })) as $repo_nodes |
@@ -30,14 +34,21 @@ jq -n --argjson repos "$REPOS_JSON" --argjson contributors "$FLAT_CONTRIBUTORS" 
     { id: ("GH:" + .login), kinds: ["GH_User"], properties: (del(._repo) | scalar_props | . + {name: .login}) }
   ] as $user_nodes |
 
-  # Edges
+  # Org-to-repo edges
+  [ $repos[] |
+    { start: { match_by: "id", value: ("GH:" + $org.login) },
+      end:   { match_by: "id", value: ("GH:" + .full_name) },
+      kind:  "GH_Contains" }
+  ] as $contains_edges |
+
+  # Contributor edges
   [ $contributors[] |
     { start: { match_by: "id", value: ("GH:" + .login) },
       end:   { match_by: "id", value: ("GH:" + ._repo) },
       kind:  "GH_ContributedTo" }
-  ] as $edges |
+  ] as $contrib_edges |
 
-  { metadata: {source_kind: "GH"}, graph: { nodes: ($repo_nodes + $user_nodes), edges: $edges } }
+  { metadata: {source_kind: "GH"}, graph: { nodes: ($org_node + $repo_nodes + $user_nodes), edges: ($contains_edges + $contrib_edges) } }
 ' > "$OUTPUT_FILE"
 
 echo "Done! Wrote to: $OUTPUT_FILE"

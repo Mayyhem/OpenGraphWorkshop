@@ -14,6 +14,4 @@ yes | ./bloodhound-cli check && \
 sed -i '/^  graph-db:/,/^  bloodhound:/{ /^  bloodhound:/!d; }; /neo4j-data/d; /graph-db/{N;d;}' ~/.config/bloodhound/docker-compose.yml && \
 yes n | ./bloodhound-cli install && \
 sleep 10 && \
-docker exec bloodhound-app-db-1 psql -U bloodhound -d bloodhound -c "UPDATE feature_flags SET enabled = true WHERE key = 'opengraph_extension_management';" && \
-# Uncomment/execute to show container logs
-#docker logs -f bloodhound-bloodhound-1
+docker exec bloodhound-app-db-1 psql -U bloodhound -d bloodhound -c "UPDATE feature_flags SET enabled = true WHERE key = 'opengraph_extension_management';"

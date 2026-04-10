@@ -3,13 +3,21 @@
 param($Org = "SpecterOps")
 $OutputFile = "lab2_1_$Org-opengraph.json"
 
+# Fetch org details
+$orgUrl = "https://api.github.com/orgs/$Org"
+Write-Verbose "GET $orgUrl"
+$orgInfo = Invoke-RestMethod -Uri $orgUrl
+
 # Fetch up to 5 public repos for the org
 $apiUrl = "https://api.github.com/orgs/$Org/repos?per_page=5"
 Write-Verbose "GET $apiUrl"
 $repos = Invoke-RestMethod -Uri $apiUrl
 Write-Verbose ($repos | ConvertTo-Json -Depth 5)
 
-$nodes = @()
+# Start with the organization node
+$orgProps = @{}
+$orgInfo.PSObject.Properties | Where-Object { $null -ne $_.Value -and $_.Value -isnot [System.Management.Automation.PSObject] -and $_.Value -isnot [System.Array] } | ForEach-Object { $orgProps[$_.Name] = $_.Value }
+$nodes = @(@{ id = "GH:$Org"; kinds = @("GH_Organization"); properties = $orgProps })
 $edges = @()
 $seenUsers = @{}
 
@@ -20,6 +28,11 @@ foreach ($repo in $repos) {
     $repoProps = @{}
     $repo.PSObject.Properties | Where-Object { $null -ne $_.Value -and $_.Value -isnot [System.Management.Automation.PSObject] -and $_.Value -isnot [System.Array] } | ForEach-Object { $repoProps[$_.Name] = $_.Value }
     $nodes += @{ id = "GH:$repoFull"; kinds = @("GH_Repo"); properties = $repoProps }
+    $edges += @{
+        start = @{ match_by = "id"; value = "GH:$Org" }
+        end   = @{ match_by = "id"; value = "GH:$repoFull" }
+        kind  = "GH_Contains"
+    }
 
     # Fetch contributors for this repo
     $contribUrl = "https://api.github.com/repos/$repoFull/contributors?per_page=100"

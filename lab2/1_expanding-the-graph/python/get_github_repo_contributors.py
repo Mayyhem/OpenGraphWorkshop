@@ -8,10 +8,13 @@ args = parser.parse_args()
 org = args.org
 output_file = f"lab2_1_{org}-opengraph.json"
 
-# Fetch up to 5 public repos for the org
+# Fetch org details and up to 5 public repos
+org_info = requests.get(f"https://api.github.com/orgs/{org}").json()
 repos = requests.get(f"https://api.github.com/orgs/{org}/repos?per_page=5").json()
 
-nodes = []
+# Start with the organization node
+org_props = {k: v for k, v in org_info.items() if not isinstance(v, (dict, list)) and v is not None}
+nodes = [{"id": f"GH:{org}", "kinds": ["GH_Organization"], "properties": org_props}]
 edges = []
 
 for repo in repos:
@@ -19,6 +22,11 @@ for repo in repos:
     # Only keep scalar (string/number/bool) properties — nested dicts/lists fail schema validation
     repo_props = {k: v for k, v in repo.items() if not isinstance(v, (dict, list)) and v is not None}
     nodes.append({"id": f"GH:{repo_full}", "kinds": ["GH_Repo"], "properties": repo_props})
+    edges.append({
+        "start": {"match_by": "id", "value": f"GH:{org}"},
+        "end":   {"match_by": "id", "value": f"GH:{repo_full}"},
+        "kind":  "GH_Contains",
+    })
 
     # Fetch contributors for each repo
     contributors = requests.get(f"https://api.github.com/repos/{repo_full}/contributors?per_page=100").json()
