@@ -14,16 +14,5 @@
       "icon": "user",
       "color": "#f5ef42"
     }
-  ],
-  "relationship_kinds": [
-  ],
-  "environments": [
-    {
-      "environment_kind": "X_User",
-      "source_kind": "X",
-      "principal_kinds": [
-        "X_User"
-      ]
-    }
   ]
 }

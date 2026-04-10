@@ -47,15 +47,5 @@
       "description": "",
       "is_traversable": true
     }    
-  ],
-  "environments": [
-    {
-      "environment_kind": "GH_Organization",
-      "source_kind": "GH",
-      "principal_kinds": [
-        "GH_Repo",
-        "GH_User"
-      ]
-    }
   ]
 }

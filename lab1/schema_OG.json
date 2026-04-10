@@ -21,14 +21,5 @@
       "description": "",
       "is_traversable": true
     }
-  ],
-  "environments": [
-    {
-      "environment_kind": "OG_Person",
-      "source_kind": "OG",
-      "principal_kinds": [
-        "OG_Person"
-      ]
-    }
   ]
 }
